@@ -15,7 +15,7 @@ body, h1, form, label, textarea, button, p {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(to bottom, #0074cc, #0053a0);
+  background: #0074cc;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
@@ -23,6 +23,7 @@ body, h1, form, label, textarea, button, p {
 /* Style the heading */
 h1 {
   color: #fff;
+  font-family: Arial, sans-serif;
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
@@ -38,22 +39,31 @@ form {
 label {
   display: block;
   color: #fff;
+  font-family: Arial, sans-serif;
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-/* Style the textarea */
+/* Style the textarea with a smooth hover animation */
 textarea {
   width: 100%;
   padding: 10px;
   border: none;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.8);
+  font-family: Arial, sans-serif;
   font-size: 14px;
-  resize: vertical;
+  resize: none;
+  transition: all 0.3s ease-in-out; /* Smooth animation */
 }
 
-/* Style the button */
+textarea:hover {
+  background: rgba(255, 255, 255, 1); /* Hover effect */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+  transform: scale(1.05); /* Scale on hover */
+}
+
+/* Style the button with a smooth hover animation */
 button {
   margin-top: 10px;
   padding: 10px 20px;
@@ -61,17 +71,20 @@ button {
   border-radius: 5px;
   background: #0053a0;
   color: #fff;
+  font-family: Arial, sans-serif;
   font-size: 16px;
   cursor: pointer;
+  transition: background 0.3s ease-in-out; /* Smooth background change */
 }
 
 button:hover {
-  background: #0074cc;
+  background: #0074cc; /* Hover effect */
 }
 
 /* Style the response message */
 p#responseMessage {
   color: #fff;
+  font-family: Arial, sans-serif;
   font-size: 14px;
   text-align: center;
   margin-top: 20px;
