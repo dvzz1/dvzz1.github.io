@@ -1,54 +1,28 @@
-// Listen for the form submission event
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('typingForm');
   const responseMessage = document.getElementById('responseMessage');
+  const startTypingButton = document.getElementById('startTypingButton');
+  const googleAppsScriptFrame = document.getElementById('googleAppsScriptFrame');
 
-  form.addEventListener('submit', async function (e) {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const textToType = document.getElementById('textToType').value;
 
     if (textToType) {
-      try {
-        const authOptions = {
-          client_id: '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com', // Replace with your Google Cloud Console project's client ID
-          callback: onAuthCallback,
-        };
-
-        google.accounts.id.initialize(authOptions);
-
-        // Trigger the Google Identity Services (GIS) one-tap prompt
-        google.accounts.id.prompt();
-
-        async function onAuthCallback(authResponse) {
-          if (authResponse['credential']) {
-            // User is signed in
-            const response = await fetch('https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec', {
-              method: 'POST',
-              mode: 'cors',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                Authorization: 'Bearer ' + authResponse['credential'],
-              },
-              body: `textToType=${encodeURIComponent(textToType)}`,
-            });
-
-            if (response.ok) {
-              const result = await response.text();
-              responseMessage.textContent = result;
-            } else {
-              responseMessage.textContent = 'Error: Unable to connect to the server.';
-            }
-          } else {
-            // Handle authentication error
-            console.error('Authentication error:', authResponse);
-          }
-        }
-      } catch (error) {
-        console.error('Authentication error:', error);
-      }
+      // Send the text to your Google Apps Script web app via the iframe
+      googleAppsScriptFrame.contentWindow.postMessage(textToType, 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec');
     } else {
       responseMessage.textContent = 'Error: Text to type is missing.';
+    }
+  });
+
+  // Listen for messages from the embedded iframe
+  window.addEventListener('message', function (event) {
+    if (event.origin === 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec') {
+      // Handle responses from the iframe (e.g., success or error messages)
+      const result = event.data;
+      responseMessage.textContent = result;
     }
   });
 });

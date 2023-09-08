@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Typing Web App</title>
-  <!-- Include the Google Identity Services (GIS) library -->
-  <script src="https://accounts.google.com/gsi/client"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -22,9 +20,11 @@
       <form id="typingForm" class="typing-form">
         <label for="textToType" class="form-label">Text to Type:</label>
         <textarea id="textToType" class="text-input" rows="5" cols="50" placeholder="Type here..."></textarea>
-        <button type="submit" class="submit-button">Start Typing</button>
+        <button type="button" id="startTypingButton" class="submit-button">Start Typing</button>
       </form>
       <p id="responseMessage" class="response-message"></p>
+      <!-- Embed Google Apps Script web app in an iframe -->
+      <iframe id="googleAppsScriptFrame" src="https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec" style="display:none;"></iframe>
     </div>
   </section>
   <footer class="footer">
