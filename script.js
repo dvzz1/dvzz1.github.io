@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Trigger the Google Identity Services (GIS) one-tap prompt
         google.accounts.id.prompt();
 
-        function onAuthCallback(authResponse) {
+        async function onAuthCallback(authResponse) {
           if (authResponse['credential']) {
             // User is signed in
             const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
