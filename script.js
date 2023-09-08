@@ -10,20 +10,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (textToType) {
       try {
-        const auth = google.accounts.id.initialize({
+        const authOptions = {
           client_id: '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com', // Replace with your Google Cloud Console project's client ID
-        });
+          scope: 'openid email',
+        };
 
-        const signInResponse = await auth.signIn();
+        const authResponse = await google.accounts.id.prompt(authOptions);
 
-        if (signInResponse['status'] === 'SUCCESS') {
+        if (authResponse['credential']) {
           // User is signed in
           const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
             method: 'POST',
             mode: 'cors',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
-              Authorization: 'Bearer ' + signInResponse['credential'],
+              Authorization: 'Bearer ' + authResponse['credential'],
             },
             body: `textToType=${encodeURIComponent(textToType)}`,
           });
@@ -35,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function () {
             responseMessage.textContent = 'Error: Unable to connect to the server.';
           }
         } else {
-          // Handle sign-in error
-          console.error('Sign-in error:', signInResponse);
+          // Handle authentication error
+          console.error('Authentication error:', authResponse);
         }
       } catch (error) {
-        console.error('Sign-in error:', error);
+        console.error('Authentication error:', error);
       }
     } else {
       responseMessage.textContent = 'Error: Text to type is missing.';
