@@ -12,32 +12,37 @@ document.addEventListener('DOMContentLoaded', function () {
       try {
         const authOptions = {
           client_id: '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com', // Replace with your Google Cloud Console project's client ID
-          scope: 'openid email',
+          callback: onAuthCallback,
         };
 
-        const authResponse = await google.accounts.id.prompt(authOptions);
+        google.accounts.id.initialize(authOptions);
 
-        if (authResponse['credential']) {
-          // User is signed in
-          const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              Authorization: 'Bearer ' + authResponse['credential'],
-            },
-            body: `textToType=${encodeURIComponent(textToType)}`,
-          });
+        // Trigger the Google Identity Services (GIS) one-tap prompt
+        google.accounts.id.prompt();
 
-          if (response.ok) {
-            const result = await response.text();
-            responseMessage.textContent = result;
+        function onAuthCallback(authResponse) {
+          if (authResponse['credential']) {
+            // User is signed in
+            const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Authorization: 'Bearer ' + authResponse['credential'],
+              },
+              body: `textToType=${encodeURIComponent(textToType)}`,
+            });
+
+            if (response.ok) {
+              const result = await response.text();
+              responseMessage.textContent = result;
+            } else {
+              responseMessage.textContent = 'Error: Unable to connect to the server.';
+            }
           } else {
-            responseMessage.textContent = 'Error: Unable to connect to the server.';
+            // Handle authentication error
+            console.error('Authentication error:', authResponse);
           }
-        } else {
-          // Handle authentication error
-          console.error('Authentication error:', authResponse);
         }
       } catch (error) {
         console.error('Authentication error:', error);
