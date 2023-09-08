@@ -1,0 +1,78 @@
+/* Reset default browser styles */
+body, h1, form, label, textarea, button, p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/* Apply styles to the container */
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(to bottom, #0074cc, #0053a0);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the heading */
+h1 {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Style the form */
+form {
+  text-align: center;
+}
+
+/* Style the label */
+label {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Style the textarea */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  resize: vertical;
+}
+
+/* Style the button */
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #0053a0;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0074cc;
+}
+
+/* Style the response message */
+p#responseMessage {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+}
