@@ -5,8 +5,7 @@ function start() {
   // Initialize the Google API Client with your API key
   gapi.client.init({
     apiKey: 'AIzaSyBM-Yl64gfsH26SE9bmXo8V45RxPFVjDEM',
-    clientId: '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com
-',
+    clientId: '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com',
     scope: 'https://www.googleapis.com/auth/documents',
   }).then(function () {
     // Listen for the form submission event
