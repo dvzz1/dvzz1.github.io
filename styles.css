@@ -1,91 +1,120 @@
 /* Reset default browser styles */
-body, h1, form, label, textarea, button, p {
+* {
   margin: 0;
   padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
+  box-sizing: border-box;
 }
 
-/* Apply styles to the container */
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  line-height: 1.6;
+}
+
 .container {
-  width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background: #0074cc;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Style the heading */
-h1 {
+/* Header styles */
+.header {
+  background-color: #0074cc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo {
   color: #fff;
-  font-family: Arial, sans-serif;
   font-size: 24px;
+}
+
+/* Hero section styles */
+.hero {
+  background-color: #fff;
+  padding: 100px 0;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.hero-title {
+  font-size: 32px;
+  color: #0074cc;
   margin-bottom: 20px;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Style the form */
-form {
-  text-align: center;
+/* Form styles */
+.typing-form {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* Style the label */
-label {
-  display: block;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+.form-label {
+  font-size: 18px;
+  color: #555;
   margin-bottom: 10px;
+  display: block;
 }
 
-/* Style the textarea with a smooth hover animation */
-textarea {
+.text-input {
   width: 100%;
   padding: 10px;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.8);
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  resize: none;
-  transition: all 0.3s ease-in-out; /* Smooth animation */
-}
-
-textarea:hover {
-  background: rgba(255, 255, 255, 1); /* Hover effect */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow on hover */
-  transform: scale(1.05); /* Scale on hover */
-}
-
-/* Style the button with a smooth hover animation */
-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background: #0053a0;
-  color: #fff;
-  font-family: Arial, sans-serif;
   font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out; /* Smooth background change */
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease-in-out;
 }
 
-button:hover {
-  background: #0074cc; /* Hover effect */
+.text-input:focus {
+  border-color: #0074cc;
 }
 
-/* Style the response message */
-p#responseMessage {
+.submit-button {
+  padding: 10px 20px;
+  background-color: #0074cc;
   color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  text-align: center;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: #0053a0;
+}
+
+/* Response message styles */
+.response-message {
+  font-size: 16px;
+  color: #0074cc;
   margin-top: 20px;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #0074cc;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-text {
+  font-size: 14px;
 }
