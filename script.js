@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         async function onAuthCallback(authResponse) {
           if (authResponse['credential']) {
             // User is signed in
-            const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec', {
               method: 'POST',
               mode: 'cors',
               headers: {
