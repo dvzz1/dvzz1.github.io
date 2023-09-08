@@ -27,12 +27,14 @@ function start() {
         }
 
         // Make a request to your Google Apps Script Web App
-        const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec?textToType=' + encodeURIComponent(textToType), {
-          method: 'GET',
+        const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
+          method: 'POST', // Change to POST method
           mode: 'cors',
           headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', // Set content type
             Authorization: 'Bearer ' + user.getAuthResponse().access_token,
           },
+          body: `textToType=${encodeURIComponent(textToType)}`, // Encode textToType
         });
 
         if (response.ok) {
