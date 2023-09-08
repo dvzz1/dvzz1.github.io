@@ -14,10 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
         googleAppsScriptFrame.contentWindow.postMessage(textToType, 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec');
         responseMessage.textContent = 'Sending text to Google Apps Script...';
 
+        console.log('Message sent:', textToType); // Log the sent message
+
         // Add a timeout to wait for a response (adjust as needed)
         const timeoutDuration = 10000; // 10 seconds
         const timeout = setTimeout(() => {
           responseMessage.textContent = 'Timeout: No response from Google Apps Script.';
+          console.error('Timeout: No response from Google Apps Script.');
         }, timeoutDuration);
 
         // Listen for messages from the embedded iframe
@@ -26,14 +29,16 @@ document.addEventListener('DOMContentLoaded', function () {
             clearTimeout(timeout); // Clear the timeout
             const result = event.data;
             responseMessage.textContent = result;
+            console.log('Response received:', result); // Log the received response
           }
         });
       } catch (error) {
         responseMessage.textContent = 'Error: ' + error.message;
-        console.error(error); // Log the error
+        console.error('Error:', error); // Log the error
       }
     } else {
       responseMessage.textContent = 'Error: Text to type is missing.';
+      console.error('Error: Text to type is missing.');
     }
   });
 });
