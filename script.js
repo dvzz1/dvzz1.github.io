@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       } catch (error) {
         responseMessage.textContent = 'Error: ' + error.message;
+        console.error(error); // Log the error
       }
     } else {
       responseMessage.textContent = 'Error: Text to type is missing.';
