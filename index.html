@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Typing Web App</title>
-  <!-- Include the Google API Client Library -->
+  <!-- Include the Google Identity Services JavaScript library -->
   <script src="https://accounts.google.com/gsi/client"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -25,6 +25,7 @@
         <button type="submit" class="submit-button">Start Typing</button>
       </form>
       <p id="responseMessage" class="response-message"></p>
+      <!-- Hidden iframe for communicating with Google Apps Script -->
       <iframe id="googleAppsScriptFrame" src="https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec" style="display: none;"></iframe>
     </div>
   </section>
