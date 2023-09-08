@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const textToType = document.getElementById('textToType').value;
 
     if (textToType) {
+      console.log('Sending text to iframe:', textToType);
       // Send the text to your Google Apps Script web app via the iframe
-      googleAppsScriptFrame.contentWindow.postMessage(textToType, 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec');
+      googleAppsScriptFrame.contentWindow.postMessage(textToType, '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com');
     } else {
       responseMessage.textContent = 'Error: Text to type is missing.';
     }
@@ -19,9 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Listen for messages from the embedded iframe
   window.addEventListener('message', function (event) {
-    if (event.origin === 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec') {
+    if (event.origin === '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com') {
       // Handle responses from the iframe (e.g., success or error messages)
       const result = event.data;
+      console.log('Received message from iframe:', result);
       responseMessage.textContent = result;
     }
   });
