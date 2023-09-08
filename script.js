@@ -20,21 +20,26 @@ function start() {
       if (textToType) {
         // Authorize the user
         const auth = gapi.auth2.getAuthInstance();
-        const user = auth.currentUser.get();
 
-        if (!user.isSignedIn()) {
-          await auth.signIn();
+        // Trigger OAuth authentication if the user is not signed in
+        if (!auth.isSignedIn.get()) {
+          try {
+            await auth.signIn();
+          } catch (error) {
+            console.error('OAuth authentication error:', error);
+            return;
+          }
         }
 
         // Make a request to your Google Apps Script Web App
         const response = await fetch('https://script.google.com/macros/s/AKfycbysWGBdwKPRd5WWtSm7_l6DToC3EN6jKcwIsPm5fiC0yMhFqyQHc4pWNRkrBotFcRJS3A/exec', {
-          method: 'POST', // Change to POST method
+          method: 'POST',
           mode: 'cors',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded', // Set content type
-            Authorization: 'Bearer ' + user.getAuthResponse().access_token,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: 'Bearer ' + auth.currentUser.get().getAuthResponse().access_token,
           },
-          body: `textToType=${encodeURIComponent(textToType)}`, // Encode textToType
+          body: `textToType=${encodeURIComponent(textToType)}`,
         });
 
         if (response.ok) {
