@@ -1,6 +1,3 @@
-// Initialize Google Identity Services (GIS)
-google.accounts.id.initialize({ client_id: 'YOUR_CLIENT_ID' }); // Replace 'YOUR_CLIENT_ID' with your actual client ID
-
 // Listen for the form submission event
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('typingForm');
@@ -13,7 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (textToType) {
       try {
-        const auth = google.accounts.id.getGsiAuth({ client_id: 'YOUR_CLIENT_ID' }); // Replace 'YOUR_CLIENT_ID' with your actual client ID
+        const auth = google.accounts.id.getAuthCode({
+          client_id: '916884835094-nu61ir6f1tbkf0nu2363t01r8g4b3fot.apps.googleusercontent.com', // Replace with your Google Cloud Console project's client ID
+          prompt_parent_id: 'content'
+        });
+
         const signInResponse = await auth.signIn();
 
         if (signInResponse['status'] === 'OK') {
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mode: 'cors',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
-              Authorization: 'Bearer ' + auth.currentUser.get().getAuthResponse().access_token,
+              Authorization: 'Bearer ' + signInResponse['auth_code'],
             },
             body: `textToType=${encodeURIComponent(textToType)}`,
           });
