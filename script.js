@@ -32,6 +32,9 @@ function readPDFText(pdfFile) {
         // Enable the audio player with synthesized speech
         audioPlayer.src = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
         audioPlayer.load();
+
+        // Display a confirmation message
+        alert('PDF uploaded and audio loaded successfully!');
     };
 
     reader.readAsText(pdfFile);
