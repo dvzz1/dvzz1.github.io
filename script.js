@@ -12,12 +12,17 @@ pdfFileInput.addEventListener('change', async () => {
         // Simulate text extraction from the PDF (replace with actual code)
         const pdfText = await simulateTextExtraction(file);
 
-        // Generate audio from text and set the source
-        const audioSrc = await generateAudioFromText(pdfText);
-        audioPlayer.src = audioSrc;
+        // Request the serverless function to generate audio from text
+        try {
+            const audioSrc = await generateAudioFromText(pdfText);
+            audioPlayer.src = audioSrc;
 
-        // Enable the play button
-        playButton.disabled = false;
+            // Enable the play button
+            playButton.disabled = false;
+        } catch (error) {
+            console.error(error);
+            alert('Error generating audio. Please try again.');
+        }
     }
 });
 
@@ -36,19 +41,22 @@ async function simulateTextExtraction(pdfFile) {
     return extractedText;
 }
 
-// Simulate audio generation (replace with actual audio generation code)
+// Function to request the serverless function to generate audio from text
 async function generateAudioFromText(text) {
-    // Simulate audio generation with a delay (replace with actual code)
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+        const response = await fetch('/.netlify/functions/generateAudio', {
+            method: 'POST',
+            body: JSON.stringify({ text }),
+        });
 
-    // Generate audio using ResponsiveVoice
-    responsiveVoice.speak(text, 'UK English Male', {
-        onend: function () {
-            // This function is called when audio playback ends
-        },
-    });
+        if (!response.ok) {
+            throw new Error('Failed to generate audio');
+        }
 
-    // Replace this with the actual URL of the generated audio
-    const audioSrc = 'https://example.com/path-to-generated-audio.mp3';
-    return audioSrc;
+        const { audioSrc } = await response.json();
+        return audioSrc;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
