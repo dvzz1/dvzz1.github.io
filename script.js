@@ -8,7 +8,7 @@ pdfFileInput.addEventListener('change', () => {
         // Display the PDF in the iframe (You may need a PDF rendering library)
         pdfViewer.src = URL.createObjectURL(file);
 
-        // Extract text from PDF and read it out loud using Web Speech API
+        // Extract text from PDF and read it out loud
         readPDFText(file);
     }
 });
@@ -37,5 +37,5 @@ function readPDFText(pdfFile) {
         alert('PDF uploaded and audio loaded successfully!');
     };
 
-    reader.readAsText(pdfFile);
+    reader.readAsArrayBuffer(pdfFile);
 }
