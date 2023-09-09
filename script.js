@@ -40,20 +40,26 @@ function extractTextAndConvertToAudio(pdfFile) {
 }
 
 function convertTextToAudio(text) {
-    // Use ResponsiveVoice to convert text to audio
-    responsiveVoice.speak(text, 'UK English Male', {
-        onend: function () {
-            // Enable the audio player with synthesized speech
-            responsiveVoice.createAudio(text, {
-                onend: function () {
-                    const audioBlob = responsiveVoice.save();
-                    audioPlayer.src = URL.createObjectURL(audioBlob);
-                    audioPlayer.load();
+    // Initialize Web Speech API
+    const synthesis = window.speechSynthesis;
 
-                    // Display a confirmation message
-                    alert('PDF uploaded and audio loaded successfully!');
-                }
-            });
-        }
-    });
+    // Cancel any previous speech synthesis
+    if (synthesis.speaking) {
+        synthesis.cancel();
+    }
+
+    // Create an utterance for text-to-speech
+    const speechUtterance = new SpeechSynthesisUtterance(text);
+
+    // Set the voice and other options (adjust as needed)
+    speechUtterance.lang = 'en-US';
+    speechUtterance.rate = 1.0;
+
+    // Use the Web Speech API to speak the text
+    synthesis.speak(speechUtterance);
+
+    // Enable the audio player with synthesized speech
+    const audioBlob = new Blob([text], { type: 'text/plain' });
+    audioPlayer.src = URL.createObjectURL(audioBlob);
+    audioPlayer.load();
 }
