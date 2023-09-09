@@ -1,4 +1,4 @@
-const { textToSpeech } = require('your-text-to-speech-library'); // Replace with the actual text-to-speech library you plan to use
+const { textToSpeech } = require('gtts'); // Replace with the actual text-to-speech library you plan to use
 
 exports.handler = async function (event, context) {
   try {
