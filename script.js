@@ -9,13 +9,11 @@ pdfFileInput.addEventListener('change', async () => {
         // Display the PDF in the iframe
         pdfPreview.innerHTML = `<embed src="${URL.createObjectURL(file)}" width="100%" height="500px" />`;
 
-        // Convert PDF content to text (not implemented here)
+        // Simulate text extraction from the PDF (replace with actual code)
+        const pdfText = await simulateTextExtraction(file);
 
-        // For demonstration purposes, we'll simulate generating audio with a delay
-        await simulateAudioGeneration();
-
-        // Set the audio source using the serverless function
-        const audioSrc = await generateAudioFromText('Your PDF text goes here'); // Replace with the extracted PDF text
+        // Generate audio from text and set the source
+        const audioSrc = await generateAudioFromText(pdfText);
         audioPlayer.src = audioSrc;
 
         // Enable the play button
@@ -28,26 +26,29 @@ playButton.addEventListener('click', () => {
     audioPlayer.play();
 });
 
-// Simulate audio generation (replace with actual audio generation code)
-async function simulateAudioGeneration() {
-    await new Promise(resolve => setTimeout(resolve, 3000)); // Simulate a 3-second delay
+// Simulate text extraction from the PDF (replace with actual code)
+async function simulateTextExtraction(pdfFile) {
+    // Simulate text extraction with a delay (replace with actual code)
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Replace this with actual text extraction code
+    const extractedText = 'This is a sample text extracted from the PDF.';
+    return extractedText;
 }
 
+// Simulate audio generation (replace with actual audio generation code)
 async function generateAudioFromText(text) {
-    try {
-        const response = await fetch('/.netlify/functions/generateAudio', {
-            method: 'POST',
-            body: JSON.stringify({ text }),
-        });
+    // Simulate audio generation with a delay (replace with actual code)
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
-        if (!response.ok) {
-            throw new Error('Failed to generate audio');
-        }
+    // Generate audio using ResponsiveVoice
+    responsiveVoice.speak(text, 'UK English Male', {
+        onend: function () {
+            // This function is called when audio playback ends
+        },
+    });
 
-        const { audioFile } = await response.json();
-        return audioFile;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+    // Replace this with the actual URL of the generated audio
+    const audioSrc = 'https://example.com/path-to-generated-audio.mp3';
+    return audioSrc;
 }
