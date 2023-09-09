@@ -1,0 +1,37 @@
+/* Reset some default styles for consistency */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Style the file upload input */
+input[type="file"] {
+    display: block;
+    margin: 20px auto;
+}
+
+/* Style the PDF viewer iframe */
+iframe#pdfViewer {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+/* Style the audio player */
+audio#audioPlayer {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+/* Add more styles to customize the appearance of your web app as needed */

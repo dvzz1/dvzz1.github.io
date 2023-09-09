@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Reader</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <h1>PDF Reader</h1>
+
+    <!-- File Upload Form -->
+    <input type="file" id="pdfFile" accept=".pdf">
+
+    <!-- PDF Viewer -->
+    <iframe id="pdfViewer" width="100%" height="500px"></iframe>
+
+    <!-- Media Controls -->
+    <audio id="audioPlayer" controls></audio>
+
+    <script>
+        const pdfFileInput = document.getElementById('pdfFile');
+        const pdfViewer = document.getElementById('pdfViewer');
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        pdfFileInput.addEventListener('change', () => {
+            const file = pdfFileInput.files[0];
+            if (file) {
+                // Display the PDF in the iframe (You may need a PDF rendering library)
+                pdfViewer.src = URL.createObjectURL(file);
+
+                // Extract text from PDF and read it out loud using a TTS library/API
+                readPDFText(file);
+            }
+        });
+
+        function readPDFText(pdfFile) {
+            // Implement text extraction and TTS functionality here
+        }
+    </script>
+</body>
+</html>
