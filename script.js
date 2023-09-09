@@ -1,45 +1,53 @@
 const pdfFileInput = document.getElementById('pdfFile');
-const pdfViewer = document.getElementById('pdfViewer');
+const pdfPreview = document.getElementById('pdfPreview');
 const audioPlayer = document.getElementById('audioPlayer');
+const playButton = document.getElementById('playButton');
 
 pdfFileInput.addEventListener('change', async () => {
     const file = pdfFileInput.files[0];
     if (file) {
         // Display the PDF in the iframe
-        pdfViewer.src = URL.createObjectURL(file);
+        pdfPreview.innerHTML = `<embed src="${URL.createObjectURL(file)}" width="100%" height="500px" />`;
 
-        // Convert PDF content to text (you need a PDF library, like pdf.js, for this)
-        const pdfText = await convertPDFToText(file);
+        // Convert PDF content to text (not implemented here)
 
-        // Make a request to the serverless function to generate audio
-        const audioUrl = await generateAudioFromText(pdfText);
+        // For demonstration purposes, we'll simulate generating audio with a delay
+        await simulateAudioGeneration();
 
-        // Set the audio source
-        audioPlayer.src = audioUrl;
+        // Set the audio source using the serverless function
+        const audioSrc = await generateAudioFromText('Your PDF text goes here'); // Replace with the extracted PDF text
+        audioPlayer.src = audioSrc;
 
-        // Load and play the audio
-        audioPlayer.load();
-        audioPlayer.play();
+        // Enable the play button
+        playButton.disabled = false;
     }
 });
 
-async function convertPDFToText(pdfFile) {
-    // Use a PDF library like pdf.js to convert PDF content to text
-    // Implement this function to extract text from the PDF
-    // Return the extracted text
+playButton.addEventListener('click', () => {
+    // Start audio playback when the play button is clicked
+    audioPlayer.play();
+});
+
+// Simulate audio generation (replace with actual audio generation code)
+async function simulateAudioGeneration() {
+    await new Promise(resolve => setTimeout(resolve, 3000)); // Simulate a 3-second delay
 }
 
 async function generateAudioFromText(text) {
-    // Make an HTTP request to the serverless function endpoint
-    const response = await fetch('/.netlify/functions/convertTextToAudio', {
-        method: 'POST',
-        body: JSON.stringify({ text }),
-    });
+    try {
+        const response = await fetch('/.netlify/functions/generateAudio', {
+            method: 'POST',
+            body: JSON.stringify({ text }),
+        });
 
-    if (!response.ok) {
-        throw new Error('Failed to generate audio');
+        if (!response.ok) {
+            throw new Error('Failed to generate audio');
+        }
+
+        const { audioFile } = await response.json();
+        return audioFile;
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
-
-    const { audioFile } = await response.json();
-    return audioFile;
 }
