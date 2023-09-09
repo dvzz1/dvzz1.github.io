@@ -44,7 +44,7 @@ async function simulateTextExtraction(pdfFile) {
 // Function to request the serverless function to generate audio from text
 async function generateAudioFromText(text) {
     try {
-        const response = await fetch('/.netlify/functions/generateAudio', {
+        const response = await fetch('/netlify-functions/generateAudio', {
             method: 'POST',
             body: JSON.stringify({ text }),
         });
