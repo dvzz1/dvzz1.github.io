@@ -1,2 +1,4 @@
-# dvzztyper
-human typing thru google docs api
+# dvzzreader
+-upload pdf
+-robot reads pdf
+-smile :-)
