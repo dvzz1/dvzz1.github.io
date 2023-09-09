@@ -14,8 +14,16 @@ pdfFileInput.addEventListener('change', () => {
 });
 
 function extractTextAndConvertToAudio(pdfFile) {
+    // Initialize Web Speech API
+    const synthesis = window.speechSynthesis;
+
+    // Cancel any previous speech synthesis
+    if (synthesis.speaking) {
+        synthesis.cancel();
+    }
+
     // Load PDF.js library
-    pdfjsLib.getDocument(pdfFile).promise.then(function (pdfDoc) {
+    pdfjsLib.getDocument(URL.createObjectURL(pdfFile)).promise.then(function (pdfDoc) {
         let text = '';
 
         // Loop through each page
@@ -40,14 +48,6 @@ function extractTextAndConvertToAudio(pdfFile) {
 }
 
 function convertTextToAudio(text) {
-    // Initialize Web Speech API
-    const synthesis = window.speechSynthesis;
-
-    // Cancel any previous speech synthesis
-    if (synthesis.speaking) {
-        synthesis.cancel();
-    }
-
     // Create an utterance for text-to-speech
     const speechUtterance = new SpeechSynthesisUtterance(text);
 
@@ -56,7 +56,7 @@ function convertTextToAudio(text) {
     speechUtterance.rate = 1.0;
 
     // Use the Web Speech API to speak the text
-    synthesis.speak(speechUtterance);
+    speechSynthesis.speak(speechUtterance);
 
     // Enable the audio player with synthesized speech
     const audioBlob = new Blob([text], { type: 'text/plain' });
