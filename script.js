@@ -41,12 +41,14 @@ function extractTextAndConvertToAudio(pdfFile) {
 
 function convertTextToAudio(text) {
     // Use ResponsiveVoice to convert text to audio
-    responsiveVoice.speak(text, 'UK English Male', { onend: function () {
-        // Enable the audio player with synthesized speech
-        audioPlayer.src = 'data:audio/wav;base64,' + btoa(responsiveVoice.getBlob());
-        audioPlayer.load();
+    responsiveVoice.speak(text, 'UK English Male', {
+        onend: function () {
+            // Enable the audio player with synthesized speech
+            audioPlayer.src = 'data:audio/wav;base64,' + btoa(responsiveVoice.getBlob());
+            audioPlayer.load();
 
-        // Display a confirmation message
-        alert('PDF uploaded and audio loaded successfully!');
-    }});
+            // Display a confirmation message
+            alert('PDF uploaded and audio loaded successfully!');
+        }
+    });
 }
