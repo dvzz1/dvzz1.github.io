@@ -44,11 +44,16 @@ function convertTextToAudio(text) {
     responsiveVoice.speak(text, 'UK English Male', {
         onend: function () {
             // Enable the audio player with synthesized speech
-            audioPlayer.src = 'data:audio/wav;base64,' + btoa(responsiveVoice.getBlob());
-            audioPlayer.load();
+            responsiveVoice.createAudio(text, {
+                onend: function () {
+                    const audioBlob = responsiveVoice.save();
+                    audioPlayer.src = URL.createObjectURL(audioBlob);
+                    audioPlayer.load();
 
-            // Display a confirmation message
-            alert('PDF uploaded and audio loaded successfully!');
+                    // Display a confirmation message
+                    alert('PDF uploaded and audio loaded successfully!');
+                }
+            });
         }
     });
 }

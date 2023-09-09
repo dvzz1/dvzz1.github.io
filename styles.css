@@ -1,37 +1,30 @@
-/* Reset some default styles for consistency */
-body, h1 {
-    margin: 0;
-    padding: 0;
+/* Basic CSS for styling the header and main content */
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
+main {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-h1 {
-    color: #333;
+/* Additional styling for file input */
+input[type="file"] {
+    display: block;
+    margin-bottom: 10px;
 }
 
-/* Style the file upload input */
-input[type="file"] {
+/* Style the iframe for PDF viewer */
+#pdfViewer {
+    border: 1px solid #ddd;
+}
+
+/* Center-align the audio player */
+#audioPlayer {
     display: block;
     margin: 20px auto;
 }
-
-/* Style the PDF viewer iframe */
-iframe#pdfViewer {
-    border: 1px solid #ccc;
-    background-color: #fff;
-}
-
-/* Style the audio player */
-audio#audioPlayer {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
-}
-
-/* Add more styles to customize the appearance of your web app as needed */

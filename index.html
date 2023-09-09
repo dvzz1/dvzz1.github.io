@@ -9,16 +9,20 @@
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=x6BslBhj"></script> <!-- responsivevoice.js CDN with your API key -->
 </head>
 <body>
-    <h1>PDF Reader</h1>
+    <header>
+        <h1>PDF Reader</h1>
+    </header>
 
-    <!-- File Upload Form -->
-    <input type="file" id="pdfFile" accept=".pdf">
+    <main>
+        <!-- File Upload Form -->
+        <input type="file" id="pdfFile" accept=".pdf">
 
-    <!-- PDF Viewer -->
-    <iframe id="pdfViewer" width="100%" height="500px"></iframe>
+        <!-- PDF Viewer -->
+        <iframe id="pdfViewer" width="100%" height="500px"></iframe>
 
-    <!-- Media Controls -->
-    <audio id="audioPlayer" controls></audio>
+        <!-- Media Controls -->
+        <audio id="audioPlayer" controls></audio>
+    </main>
 
     <!-- Link to your external JavaScript file -->
     <script src="script.js"></script>
