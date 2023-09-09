@@ -2,6 +2,7 @@ const pdfFileInput = document.getElementById('pdfFile');
 const pdfViewer = document.getElementById('pdfViewer');
 const audioPlayer = document.getElementById('audioPlayer');
 const playButton = document.getElementById('playButton');
+const uploadMessage = document.getElementById('uploadMessage');
 
 // Set the worker source URL for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.10.111/pdf.worker.min.js';
@@ -11,6 +12,9 @@ pdfFileInput.addEventListener('change', () => {
     if (file) {
         // Display the PDF in the iframe
         pdfViewer.src = URL.createObjectURL(file);
+
+        // Show successful upload message
+        uploadMessage.style.display = 'block';
 
         // Extract text from PDF and convert it to audio
         extractTextAndConvertToAudio(file);
@@ -63,6 +67,12 @@ function convertTextToAudio(text) {
     // Set the voice and other options (adjust as needed)
     speechUtterance.lang = 'en-US';
     speechUtterance.rate = 1.0;
+
+    // Enable the play button
+    playButton.disabled = false;
+
+    // Use the Web Speech API to speak the text
+    speechSynthesis.speak(speechUtterance);
 
     // Enable the audio player with synthesized speech
     const audioBlob = new Blob([text], { type: 'text/plain' });

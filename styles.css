@@ -1,30 +1,79 @@
-/* Basic CSS for styling the header and main content */
+/* Reset some default styles */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling for the header */
 header {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
 }
 
+/* Main container */
 main {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Additional styling for file input */
+/* File input */
 input[type="file"] {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
 }
 
-/* Style the iframe for PDF viewer */
+/* Successful upload message */
+#uploadMessage {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* PDF viewer iframe */
 #pdfViewer {
-    border: 1px solid #ddd;
+    width: 100%;
+    height: 500px;
+    border: none;
+    margin-bottom: 20px;
 }
 
-/* Center-align the audio player */
-#audioPlayer {
-    display: block;
-    margin: 20px auto;
+/* Media controls and play button container */
+#mediaControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Media controls (audio player and play button) */
+#audioPlayer, #playButton {
+    margin: 0 10px;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+/* Style for the play button on hover */
+#playButton:hover {
+    background-color: #0056b3;
 }
