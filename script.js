@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (textToType) {
       try {
         // Send the text to your Google Apps Script web app via the iframe
-        googleAppsScriptFrame.contentWindow.postMessage(textToType, 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec');
+        googleAppsScriptFrame.contentWindow.postMessage(textToType, 'https://script.google.com/macros/s/AKfycbyNsF0qf81DHMiwMrpdGItbixCzpvXygKk8G16I5lbYPTNAGA9lOhBtPrArLYjVPY02VQ/exec');
         responseMessage.textContent = 'Sending text to Google Apps Script...';
 
         console.log('Message sent:', textToType); // Log the sent message
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Listen for messages from the embedded iframe
         window.addEventListener('message', function (event) {
-          if (event.origin === 'https://script.google.com/macros/s/AKfycbz0ahKj7DC16bvcVN1Wd2UUwRZh0hIbKUvRY-j45dULb5y78-0Uzeouwshak-1uCTc_Vg/exec') {
+          if (event.origin === 'https://script.google.com/macros/s/AKfycbyNsF0qf81DHMiwMrpdGItbixCzpvXygKk8G16I5lbYPTNAGA9lOhBtPrArLYjVPY02VQ/exec') {
             clearTimeout(timeout); // Clear the timeout
             const result = event.data;
             responseMessage.textContent = result;
