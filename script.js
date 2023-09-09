@@ -75,7 +75,7 @@ function convertTextToAudio(text) {
     speechSynthesis.speak(speechUtterance);
 
     // Enable the audio player with synthesized speech
-    const audioBlob = new Blob([text], { type: 'text/plain' });
+    const audioBlob = new Blob([text], { type: 'audio/mpeg' });
     audioPlayer.src = URL.createObjectURL(audioBlob);
     audioPlayer.load();
 }
