@@ -1,0 +1,15 @@
+{
+  "name": "dvzz1.github.io",
+  "version": "1.0.0",
+  "description": "-upload pdf -robot reads pdf -smile :-)",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gtts": "^0.2.1"
+  }
+}
