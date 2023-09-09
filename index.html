@@ -18,25 +18,7 @@
     <!-- Media Controls -->
     <audio id="audioPlayer" controls></audio>
 
-    <script>
-        const pdfFileInput = document.getElementById('pdfFile');
-        const pdfViewer = document.getElementById('pdfViewer');
-        const audioPlayer = document.getElementById('audioPlayer');
-
-        pdfFileInput.addEventListener('change', () => {
-            const file = pdfFileInput.files[0];
-            if (file) {
-                // Display the PDF in the iframe (You may need a PDF rendering library)
-                pdfViewer.src = URL.createObjectURL(file);
-
-                // Extract text from PDF and read it out loud using a TTS library/API
-                readPDFText(file);
-            }
-        });
-
-        function readPDFText(pdfFile) {
-            // Implement text extraction and TTS functionality here
-        }
-    </script>
+    <!-- Link to your external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
