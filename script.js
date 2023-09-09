@@ -1,81 +1,45 @@
 const pdfFileInput = document.getElementById('pdfFile');
 const pdfViewer = document.getElementById('pdfViewer');
 const audioPlayer = document.getElementById('audioPlayer');
-const playButton = document.getElementById('playButton');
-const uploadMessage = document.getElementById('uploadMessage');
 
-// Set the worker source URL for PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.10.111/pdf.worker.min.js';
-
-pdfFileInput.addEventListener('change', () => {
+pdfFileInput.addEventListener('change', async () => {
     const file = pdfFileInput.files[0];
     if (file) {
         // Display the PDF in the iframe
         pdfViewer.src = URL.createObjectURL(file);
 
-        // Show successful upload message
-        uploadMessage.style.display = 'block';
+        // Convert PDF content to text (you need a PDF library, like pdf.js, for this)
+        const pdfText = await convertPDFToText(file);
 
-        // Extract text from PDF and convert it to audio
-        extractTextAndConvertToAudio(file);
+        // Make a request to the serverless function to generate audio
+        const audioUrl = await generateAudioFromText(pdfText);
+
+        // Set the audio source
+        audioPlayer.src = audioUrl;
+
+        // Load and play the audio
+        audioPlayer.load();
+        audioPlayer.play();
     }
 });
 
-playButton.addEventListener('click', () => {
-    // Start audio playback when the play button is clicked
-    audioPlayer.play();
-});
-
-function extractTextAndConvertToAudio(pdfFile) {
-    // Initialize Web Speech API
-    const synthesis = window.speechSynthesis;
-
-    // Cancel any previous speech synthesis
-    if (synthesis.speaking) {
-        synthesis.cancel();
-    }
-
-    // Load PDF.js library
-    pdfjsLib.getDocument(URL.createObjectURL(pdfFile)).promise.then(function (pdfDoc) {
-        let text = '';
-
-        // Loop through each page
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-            pdfDoc.getPage(pageNum).then(function (page) {
-                return page.getTextContent();
-            }).then(function (pageText) {
-                // Combine text from all pages
-                for (const item of pageText.items) {
-                    text += item.str + ' ';
-                }
-
-                // If this is the last page, convert text to audio
-                if (pageNum === pdfDoc.numPages) {
-                    convertTextToAudio(text);
-                }
-            });
-        }
-    }).catch(function (error) {
-        console.error('Error loading PDF: ' + error.message);
-    });
+async function convertPDFToText(pdfFile) {
+    // Use a PDF library like pdf.js to convert PDF content to text
+    // Implement this function to extract text from the PDF
+    // Return the extracted text
 }
 
-function convertTextToAudio(text) {
-    // Create an utterance for text-to-speech
-    const speechUtterance = new SpeechSynthesisUtterance(text);
+async function generateAudioFromText(text) {
+    // Make an HTTP request to the serverless function endpoint
+    const response = await fetch('/.netlify/functions/convertTextToAudio', {
+        method: 'POST',
+        body: JSON.stringify({ text }),
+    });
 
-    // Set the voice and other options (adjust as needed)
-    speechUtterance.lang = 'en-US';
-    speechUtterance.rate = 1.0;
+    if (!response.ok) {
+        throw new Error('Failed to generate audio');
+    }
 
-    // Enable the play button
-    playButton.disabled = false;
-
-    // Use the Web Speech API to speak the text
-    speechSynthesis.speak(speechUtterance);
-
-    // Enable the audio player with synthesized speech
-    const audioBlob = new Blob([text], { type: 'audio/mpeg' });
-    audioPlayer.src = URL.createObjectURL(audioBlob);
-    audioPlayer.load();
+    const { audioFile } = await response.json();
+    return audioFile;
 }
